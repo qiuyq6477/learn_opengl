@@ -77,7 +77,7 @@ int main()
 	// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
 	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
 	// glBindVertexArray(0);
-
+	
 
 	// render loop
 	// -----------
@@ -94,6 +94,8 @@ int main()
 
 		// render the triangle
 		ourShader.use();
+		float offset = 0.5f;
+		ourShader.setFloat("xOffset", offset);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
