@@ -2,10 +2,16 @@
 out vec4 FragColor;
 
 in vec3 ourColor;
-in vec3 txtCoord;
+in vec2 TexCoord;
+
+// texture samplers
+uniform sampler2D texture1;
+uniform sampler2D texture2;//供纹理对象使用的内建数据类型，采样器(Sampler)
 
 void main()
 {
-//左下角的位置值为负数，颜色值的范围在0-1，所以左下角为黑色
-    FragColor = vec4(txtCoord, 1.0f);
+	// linearly interpolate between both textures (80% container, 20% awesomeface)
+	//进行纹理采样，第一个参数是纹理采样器，第二个参数是对应的纹理坐标。
+    //texture函数会使用之前设置的纹理参数对相应的颜色值进行采样。
+	FragColor = mix(texture(texture1, TexCoord), texture(texture2, TexCoord), 0.2);
 }
