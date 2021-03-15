@@ -111,10 +111,14 @@ int main()
 	// ------------------------------------------------------------------
 	// 定义顶点数据
 	float vertices[] = {
-			0.5f,  0.5f, 0.0f,  // top right
-			0.5f, -0.5f, 0.0f,  // bottom right
-		   -0.5f, -0.5f, 0.0f,  // bottom left
-		   -0.5f,  0.5f, 0.0f   // top left
+		// first triangle
+	   -0.9f, -0.5f, 0.0f,  // left 
+	   -0.0f, -0.5f, 0.0f,  // right
+	   -0.45f, 0.5f, 0.0f,  // top 
+	   // second triangle
+		0.0f, -0.5f, 0.0f,  // left
+		0.9f, -0.5f, 0.0f,  // right
+		0.45f, 0.5f, 0.0f   // top 
 	};
 	unsigned int indices[] = {  // note that we start from 0!
 		   0, 1, 3,  // first Triangle
@@ -129,7 +133,7 @@ int main()
 	//创建顶点缓冲对象，使用这些缓冲对象的好处是我们可以一次性的发送一大批数据到显卡上，而不是每个顶点发送一次。
 	glGenBuffers(1, &VBO);
 	//创建索引缓冲对象，用来储存索引，OpenGL调用这些顶点的索引来决定该绘制哪个顶点。
-	glGenBuffers(1, &EBO);
+	//glGenBuffers(1, &EBO);
 	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and  then configure vertex attributes(s).
 	//绑定VAO，从绑定之后起，我们应该绑定和配置对应的VBO和属性指针，之后解绑VAO供之后使用。以后如果要绘制一个物体的时候，只要在绘制物体前简单地把VAO绑定到希望使用的设定上就行了。
 	glBindVertexArray(VAO);
@@ -149,8 +153,8 @@ int main()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	//绑定EBO
 	//复制索引数组到一个索引缓冲中
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 	//设定顶点属性指针
 	//1，指定要配置的顶点属性，对应于顶点shader里面的layout(location = 0)
 	//2，指定顶点属性大小，顶点属性是一个vec3，它由3个值组成，所以大小是3
@@ -189,8 +193,8 @@ int main()
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no  need to bind it every time, but we'll do so to keep things a bit more organized
 		//如果没有使用EBO，就要用下面这句话来绘制三角形
-		//glDrawArrays(GL_TRIANGLES, 0, 6);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		// glBindVertexArray(0); // no need to unbind it every time
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse  moved etc.)
 		//  -------------------------------------------------------------------------------
