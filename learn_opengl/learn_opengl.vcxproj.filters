@@ -40,5 +40,8 @@
     <None Include="shader.fs">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="light_cube.fs">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

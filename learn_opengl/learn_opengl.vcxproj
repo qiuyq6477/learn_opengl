@@ -87,7 +87,8 @@
       <AdditionalDependencies>opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)learn_opengl\shader.*" "$(TargetDir)"
+      <Command>copy "$(SolutionDir)learn_opengl\*.fs" "$(TargetDir)"
+copy "$(SolutionDir)learn_opengl\*.vs" "$(TargetDir)"
 copy "$(SolutionDir)learn_opengl\*.jpg" "$(TargetDir)"
 copy "$(SolutionDir)learn_opengl\*.png" "$(TargetDir)"</Command>
     </PostBuildEvent>
@@ -143,6 +144,7 @@ copy "$(SolutionDir)learn_opengl\*.png" "$(TargetDir)"</Command>
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="light_cube.fs" />
     <None Include="shader.fs" />
     <None Include="shader.vs" />
   </ItemGroup>
