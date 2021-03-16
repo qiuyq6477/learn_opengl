@@ -91,9 +91,17 @@ int main()
 	-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
 	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 	};
-	unsigned int indices[] = {
-		   0, 1, 3, // first triangle
-		   1, 2, 3  // second triangle
+	glm::vec3 cubePositions[] = {
+	  glm::vec3(0.0f,  0.0f,  0.0f),
+	  glm::vec3(2.0f,  5.0f, -15.0f),
+	  glm::vec3(-1.5f, -2.2f, -2.5f),
+	  glm::vec3(-3.8f, -2.0f, -12.3f),
+	  glm::vec3(2.4f, -0.4f, -3.5f),
+	  glm::vec3(-1.7f,  3.0f, -7.5f),
+	  glm::vec3(1.3f, -2.0f, -2.5f),
+	  glm::vec3(1.5f,  2.0f, -2.5f),
+	  glm::vec3(1.5f,  0.2f, -1.5f),
+	  glm::vec3(-1.3f,  1.0f, -1.5f)
 	};
 	unsigned int VBO, VAO, EBO;
 	glGenVertexArrays(1, &VAO);
@@ -168,6 +176,8 @@ int main()
 	glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
 	// or set it via the texture class
 	ourShader.setInt("texture2", 1);
+
+
 	glEnable(GL_DEPTH_TEST);
 	// render loop
 	// -----------
@@ -188,26 +198,26 @@ int main()
 		glBindTexture(GL_TEXTURE_2D, texture2);
 		// render container
 		ourShader.use();
-
-		//变换矩阵，通过将顶点坐标乘以这个模型矩阵，我们将该顶点坐标变换到世界坐标。
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::rotate(model, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
-		//观察矩阵，opengl是右手坐标系，摄像机位于原点，
 		glm::mat4 view = glm::mat4(1.0f); // 注意，我们将矩阵向我们要进行移动场景的反方向移动。
-		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-		//投影矩阵
 		glm::mat4 projection = glm::mat4(1.0f);
 		projection = glm::perspective(glm::radians(45.0f), (float)(SCR_WIDTH / SCR_HEIGHT), 0.1f, 100.0f);
+		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+		ourShader.setMat4("projection", projection); // note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
+		ourShader.setMat4("view", view);
 
-
-		int modelLoc = glGetUniformLocation(ourShader.ID, "model");
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		int viewLoc = glGetUniformLocation(ourShader.ID, "view");
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-		int projectionLoc = glGetUniformLocation(ourShader.ID, "projection");
-		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+		//变换矩阵，通过将顶点坐标乘以这个模型矩阵，我们将该顶点坐标变换到世界坐标。
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		for (unsigned int i = 0; i < 10; i++)
+		{
+			// calculate the model matrix for each object and pass it to shader before drawing
+			glm::mat4 model = glm::mat4(1.0f);
+			model = glm::translate(model, cubePositions[i]);
+			float angle = 20.0f * (i+1);
+			model = glm::rotate(model, (float)glfwGetTime() * glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+			ourShader.setMat4("model", model);
+
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse  moved etc.)
 		//  -------------------------------------------------------------------------------
 		glfwSwapBuffers(window);
