@@ -6,20 +6,18 @@ layout (location = 2) in vec2 aTexCoords;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
-uniform vec3 lightPos;
-uniform vec3 viewPos;
 
 out vec3 Normal;
 out vec3 FragPos;  
-out vec3 LightPos;
 
 out vec2 TexCoords;
 
 void main()
 {
-   gl_Position = projection * view * model * vec4(aPos, 1.0);
-   FragPos = vec3(view * model * vec4(aPos, 1.0));//顶点在世界空间中的位置
-   Normal = mat3(transpose(inverse(view * model))) * aNormal;//顶点的法向量
-   LightPos = vec3(view * vec4(lightPos, 1.0));// Transform world-space light position to view-space light position
-   TexCoords = aTexCoords;
+    FragPos = vec3(model * vec4(aPos, 1.0));
+    Normal = mat3(transpose(inverse(model))) * aNormal;  
+    TexCoords = aTexCoords;
+    
+    gl_Position = projection * view * vec4(FragPos, 1.0);
 };
+
