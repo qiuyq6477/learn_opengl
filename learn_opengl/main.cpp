@@ -149,7 +149,7 @@ int main()
 	// load textures (we now use a utility function to keep the code more organized)
 	// -----------------------------------------------------------------------------
 	unsigned int diffuseMap = loadTexture("./container2.png");
-	unsigned int specularMap = loadTexture("./container2_specular.png");
+	unsigned int specularMap = loadTexture("./lighting_maps_specular_color.png");
 
 	// shader configuration
 	// --------------------
