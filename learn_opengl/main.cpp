@@ -229,7 +229,7 @@ int main()
 	shader.setInt("texture1", 0);
 
 	shader_screen.use();
-	shader_screen.setInt("texture1", 0);
+	shader_screen.setInt("screenTexture", 0);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	// render loop
 	// -----------
