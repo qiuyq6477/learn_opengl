@@ -151,6 +151,8 @@ copy "$(SolutionDir)learn_opengl\*.png" "$(TargetDir)"</Command>
     <None Include="shader.fs" />
     <None Include="shader.vs" />
     <None Include="shaderSingleColor.fs" />
+    <None Include="shader_screen.fs" />
+    <None Include="shader_screen.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

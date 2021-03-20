@@ -55,5 +55,11 @@
     <None Include="shaderSingleColor.fs">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="shader_screen.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="shader_screen.fs">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
