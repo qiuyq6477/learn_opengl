@@ -147,12 +147,16 @@ copy "$(SolutionDir)learn_opengl\*.png" "$(TargetDir)"</Command>
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="debug_quad.vs" />
+    <None Include="debug_quad_depth.fs" />
     <None Include="light_cube.fs" />
     <None Include="shader.fs" />
     <None Include="shader.vs" />
     <None Include="shaderSingleColor.fs" />
     <None Include="shader_screen.fs" />
     <None Include="shader_screen.vs" />
+    <None Include="shadow_mapping_depth.fs" />
+    <None Include="shadow_mapping_depth.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

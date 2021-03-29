@@ -61,5 +61,17 @@
     <None Include="shader_screen.fs">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="shadow_mapping_depth.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="debug_quad.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="debug_quad_depth.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="shadow_mapping_depth.vs">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
